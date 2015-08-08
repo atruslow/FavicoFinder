@@ -1,0 +1,49 @@
+
+<div class="container">
+    <!--Inline css is bad form, but in the interest of time I used it here-->
+    <div class="jumbotron" style="background-image: url('/img/coffee.jpg'); background-repeat: no-repeat; background-position: center; min-height: 300px">
+        <h1 class="text-center text-primary">Get Your Favico Fix</h1>
+        <p class="text-center text-primary">The world's leading repository of favicons</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-2">
+            <form class="form-horizontal" method="post" action="/">
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">Domain</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="domain" name="domain" placeholder="Domain Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4">
+            {{#if msgs}}
+            <div class="alert alert-success">
+                <ul>
+                    {{#each msgs}}
+                        <li>{{msg}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+            {{#if errors}}
+            <div class="alert alert-danger">
+                <ul>
+                    {{#each errors}}
+                        <li>{{msg}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+
+</div>
