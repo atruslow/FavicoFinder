@@ -30,8 +30,6 @@ fs.readFileAsync(argv.f)
  */
 function loadCSV (csvData, n, i) {
 
-    console.log(i);
-
     if (n < i || csvData.length < i) {
         return;
     }
