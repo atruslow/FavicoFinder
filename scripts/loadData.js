@@ -10,6 +10,11 @@ var domainService = require('../services/domainService');
 
 if (!argv.f) console.log('-f flag required');
 if (!argv.n) console.log('-n flag required');
+if (!argv.t) console.log('-t flag required');
+if (!argv.b) console.log('-b flag required');
+
+var threadAmount = argv.t;
+var threadNumber = argv.b;
 
 fs.readFileAsync(argv.f)
     .then(function (fileData) {
@@ -34,8 +39,12 @@ function loadCSV (csvData, n, i) {
         return;
     }
 
+    if (i % threadAmount != threadNumber ) {
+        return loadCSV(csvData, n, ++i);
+    }
+
     // I do this recursively so I can control the execution to run one at a time.
-    // This is "technically" recursion because of the way JS handles callbacks, so it wont hit a max recursion depth.
+    // This is not "technically" recursion because of the way JS handles callbacks, so it wont hit a max recursion depth.
 
     // On 2nd thought Node probably isn't a good choice for loading data like this.
     // Before I did this recursively I was getting this memory leak:
@@ -43,11 +52,11 @@ function loadCSV (csvData, n, i) {
     // You can see from the top answer it is caused by a bug in Node that was recently introduced.
 
     domainService
-        .loadDomain(csvData[i][1])
+        .createDomain(csvData[i][1])
         .then(function () {
             loadCSV(csvData, n, ++i);
         }).catch(function (error) {
-            console.log(error);
+            console.error(error);
             loadCSV(csvData, n, ++i);
         });
 
