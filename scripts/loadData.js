@@ -35,7 +35,7 @@ function loadCSV (csvData, n, i) {
         return;
     }
     // I do this recursively so I can control the execution to run one at a time.
-    // This is "technically" recursion because of the way JS handles callbacks, so it wont hit a max recursion depth.
+    // This is not "technically" recursion because of the way JS handles callbacks, so it wont hit a max recursion depth.
 
     // On 2nd thought Node probably isn't a good choice for loading data like this.
     // Before I did this recursively I was getting this memory leak:
